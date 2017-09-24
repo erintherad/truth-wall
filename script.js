@@ -47,11 +47,6 @@ function fetchFortune() {
   });
 }
 
-// call default fortune
-function appendDefaultFortune() {
-  appendFortune('A penny saved is a penny earned');
-}
-
 function getFortunes() {
   var fortunes = [];
 
@@ -69,40 +64,58 @@ function setFortunes(fortunes) {
   localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(fortunes));
 }
 
-function renderFortune(fortune, index) {
-  var $truthEl = $('<li id="fortune_' + index + '">' + fortune + '<a href="#" onClick="deleteFortune(' + index + ')">Delete</a></li>')
-  $('#truth-wall').append($truthEl);
+function renderFortune(fortune) {
+  var listItem = $('<li>', { id: 'fortune_' + fortune.id });
+  listItem.text(fortune.text);
+  var anchor = $('<a>', { href: '#', onClick: 'deleteFortune("' + fortune.id + '")' })
+  anchor.text('Delete');
+  listItem.append(anchor);
+
+  $('#truth-wall').append(listItem);
+}
+
+// call default fortune
+function appendDefaultFortune() {
+  appendFortune('A penny saved is a penny earned');
 }
 
 // accepts a string fortune and adds it to localStorage
-function appendFortune(fortune) {
+function appendFortune(fortuneText) {
   var fortunes = getFortunes();
 
+  // found on stackoverflow.
+  var id = Math.random().toString(36).substring(2, 10);
+  var fortune = { id: id, text: fortuneText };
   fortunes.push(fortune);
 
   setFortunes(fortunes);
 
-  var index = fortunes.length - 1;
-  renderFortune(fortune, index);
+  renderFortune(fortune);
 }
 
 function initializeFortunes() {
   var fortunes = getFortunes();
 
   $.each(fortunes, function(index, fortune) {
-    renderFortune(fortune, index);
+    renderFortune(fortune);
   });
 }
 
-function deleteFortune(index) {
-  var fortunes = getFortunes();
+function deleteFortune(id) {
+  var oldFortunes = getFortunes();
+  var newFortunes = [];
 
   // removes fortune from localStorage
-  fortunes.splice(index, 1);
-  setFortunes(fortunes);
+  $.each(oldFortunes, function(idx, f) {
+    if (f.id !== id) {
+      newFortunes.push(f);
+    }
+  });
+
+  setFortunes(newFortunes);
 
   // removes fortune from dom
-  $('#fortune_' + index).remove();
+  $('#fortune_' + id).remove();
 }
 
 $(document).ready(function() {
