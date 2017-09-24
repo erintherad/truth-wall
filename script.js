@@ -65,7 +65,7 @@ function setFortunes(fortunes) {
 }
 
 function renderFortune(fortune) {
-  var listItem = $('<li>', { id: 'fortune_' + fortune.id });
+  var listItem = $('<div>', { id: 'fortune_' + fortune.id, class: 'grid-item' });
   listItem.text(fortune.text);
   var anchor = $('<a>', { href: '#', onClick: 'deleteFortune("' + fortune.id + '")' })
   anchor.text('Delete');
