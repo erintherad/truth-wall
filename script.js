@@ -15,6 +15,7 @@ function fetchFortuneWithTimeout() {
   timeoutState.exceeded = false;
   timeoutState.id = setTimeout(function() {
     timeoutState.exceeded = true;
+    $('#add-fortune-btn').prop('disabled', false);
     appendDefaultFortune();
   }, MAX_DURATION);
 
@@ -28,6 +29,7 @@ function fetchFortune() {
     url: API_URL,
     dataType: 'json',
     success: function(data) {
+      $('#add-fortune-btn').prop('disabled', false);
       if (!timeoutState.exceeded) {
         // prevent default fortune
         clearTimeout(timeoutState.id);
@@ -69,5 +71,8 @@ function appendFortune(fortune) {
 }
 
 $(document).ready(function() {
-  fetchFortuneWithTimeout();
+  $('#add-fortune-btn').click(function(event) {
+    $(this).prop('disabled', true);
+    fetchFortuneWithTimeout();
+  });
 });
