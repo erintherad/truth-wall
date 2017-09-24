@@ -34,9 +34,7 @@ function fetchFortune() {
         // prevent default fortune
         clearTimeout(timeoutState.id);
 
-        // append data to dom
-
-        // add to localStorage
+        // add to localStorage and add to dom
         appendFortune(data.fortune.join(''));
       }
     },
@@ -54,8 +52,7 @@ function appendDefaultFortune() {
   appendFortune('A penny saved is a penny earned');
 }
 
-// accepts a string fortune and adds it to localStorage
-function appendFortune(fortune) {
+function getFortunes() {
   var fortunes = [];
 
   // retrieve existing fortunes from localStorage
@@ -65,12 +62,37 @@ function appendFortune(fortune) {
     fortunes = JSON.parse(fortuneString);
   }
 
+  return fortunes;
+}
+
+function renderFortune(fortune, index) {
+  var $truthEl = $('<li id="fortune_' + index + '">' + fortune + '</li>')
+  $('#truth-wall').append($truthEl);
+}
+
+// accepts a string fortune and adds it to localStorage
+function appendFortune(fortune) {
+  var fortunes = getFortunes();
+
   fortunes.push(fortune);
 
   localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(fortunes));
+
+  var index = fortunes.length - 1;
+  renderFortune(fortune, index);
+}
+
+function initializeFortunes() {
+  var fortunes = getFortunes();
+
+  $.each(fortunes, function(index, fortune) {
+    renderFortune(fortune, index);
+  });
 }
 
 $(document).ready(function() {
+  initializeFortunes();
+  
   $('#add-fortune-btn').click(function(event) {
     $(this).prop('disabled', true);
     fetchFortuneWithTimeout();
