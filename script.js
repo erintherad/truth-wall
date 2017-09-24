@@ -65,8 +65,12 @@ function getFortunes() {
   return fortunes;
 }
 
+function setFortunes(fortunes) {
+  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(fortunes));
+}
+
 function renderFortune(fortune, index) {
-  var $truthEl = $('<li id="fortune_' + index + '">' + fortune + '</li>')
+  var $truthEl = $('<li id="fortune_' + index + '">' + fortune + '<a href="#" onClick="deleteFortune(' + index + ')">Delete</a></li>')
   $('#truth-wall').append($truthEl);
 }
 
@@ -76,7 +80,7 @@ function appendFortune(fortune) {
 
   fortunes.push(fortune);
 
-  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(fortunes));
+  setFortunes(fortunes);
 
   var index = fortunes.length - 1;
   renderFortune(fortune, index);
@@ -90,9 +94,20 @@ function initializeFortunes() {
   });
 }
 
+function deleteFortune(index) {
+  var fortunes = getFortunes();
+
+  // removes fortune from localStorage
+  fortunes.splice(index, 1);
+  setFortunes(fortunes);
+
+  // removes fortune from dom
+  $('#fortune_' + index).remove();
+}
+
 $(document).ready(function() {
   initializeFortunes();
-  
+
   $('#add-fortune-btn').click(function(event) {
     $(this).prop('disabled', true);
     fetchFortuneWithTimeout();
