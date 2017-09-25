@@ -64,15 +64,29 @@ function setFortunes(fortunes) {
   localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(fortunes));
 }
 
-function renderFortune(fortune) {
-  var listItem = $('<div>', { id: 'fortune_' + fortune.id, class: 'card' });
+// random colors
+var safeColors = ['00','33','66','99','cc','ff'];
+var rand = function() {
+    return Math.floor(Math.random()*6);
+};
+var randomColor = function() {
+    var r = safeColors[rand()];
+    var g = safeColors[rand()];
+    var b = safeColors[rand()];
+    return 'rgba(' + r + ', ' + g + ', ' + b + ', 0.5);';
+};
+
+function renderFortune(fortune, totalCount) {
+  var height = 100.0 / (Math.floor(totalCount / 2) + 1);
+
+  var card = $('<div>', { id: 'fortune_' + fortune.id, class: 'card', style: 'height: ' + height + '%; background-color: ' + randomColor() });
   var anchor = $('<a>', { href: '#', onClick: 'deleteFortune("' + fortune.id + '")', class: 'pull-right deleteBtn' })
   anchor.append('<span class="glyphicon glyphicon-remove-sign"></span>');
-  listItem.append(anchor);
+  card.append(anchor);
   var listText = $('<blockquote class="card-blockquote">' + fortune.text + '</blockquote>')
-  listItem.append(listText);
+  card.append(listText);
 
-  $('#truth-wall').prepend(listItem);
+  $('#truth-wall').prepend(card);
 }
 
 // call default fortune
@@ -91,14 +105,17 @@ function appendFortune(fortuneText) {
 
   setFortunes(fortunes);
 
-  renderFortune(fortune);
+  // renderFortune(fortune, fortunes.length);
+  initializeFortunes();
 }
 
 function initializeFortunes() {
+  $('#truth-wall .card').remove();
+
   var fortunes = getFortunes();
 
   $.each(fortunes, function(index, fortune) {
-    renderFortune(fortune);
+    renderFortune(fortune, fortunes.length);
   });
 }
 

@@ -1,29 +1,29 @@
 body {
-  width: 100%;
-  margin: 0 auto;
+  /*width: 100%;*/
+  /*margin: 0 auto;*/
 }
 
-.truth-row {
-  width: 70%;
-  margin: 0 auto;
+#truth-wall {
+  width: 100vw;
+  height: 100vh;
 }
 
-.truth-div {
-  width: 100%;
+#new-fortune {
+  display: inline-block;
+  float: left;
+  width: 100%
 }
 
-.card-columns {
-  width: 100%;
-  column-count: 4;
+#add-fortune-btn {
+  margin: auto;
+  display: block;
+  top: 50%;
+  position: relative;
 }
 
 .card {
   display: inline-block;
-  width: 200px;
-  border: 1px black solid;
-  margin: 15px;
-}
-
-.deleteDiv {
-  border: none !important;
+  width: 50%;
+  padding: 15px;
+  float: left;
 }
