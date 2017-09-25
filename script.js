@@ -47,6 +47,7 @@ function fetchFortune() {
   });
 }
 
+// gets and returns fortunes from localStorage
 function getFortunes() {
   var fortunes = [];
 
@@ -60,6 +61,7 @@ function getFortunes() {
   return fortunes;
 }
 
+// updates localStorage with most recent set of fortunes
 function setFortunes(fortunes) {
   localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(fortunes));
 }
@@ -80,6 +82,7 @@ var randomColor = function() {
     return 'rgba(' + r + ', ' + g + ', ' + b + ', 0.6);';
 };
 
+// generates fortune el
 function renderFortune(fortune, totalCount) {
   var height = 100.0 / (Math.floor(totalCount / 2) + 1);
 
@@ -112,6 +115,7 @@ function appendFortune(fortuneText) {
   initializeFortunes();
 }
 
+// logic that assists specific css for fortunes and button
 function isFortunesOdd() {
   var fortunes = getFortunes();
   var totalCount = fortunes.length;
@@ -139,6 +143,7 @@ function isFortunesOdd() {
   }
 }
 
+// clears and creates fortunes
 function initializeFortunes() {
   $('#truth-wall .card').remove();
 
@@ -147,9 +152,11 @@ function initializeFortunes() {
   $.each(fortunes, function(index, fortune) {
     renderFortune(fortune, fortunes.length);
   });
-        isFortunesOdd();
+
+  isFortunesOdd();
 }
 
+// removes fortune
 function deleteFortune(id) {
   var oldFortunes = getFortunes();
   var newFortunes = [];
