@@ -87,7 +87,7 @@ function renderFortune(fortune, totalCount) {
   var anchor = $('<a>', { href: '#', onClick: 'deleteFortune("' + fortune.id + '")', class: 'pull-right deleteBtn' })
   anchor.append('<span class="glyphicon glyphicon-remove-sign"></span>');
   card.append(anchor);
-  var listText = $('<h2>' + fortune.text + '</h2>')
+  var listText = $('<h2 class="text-center fortune-text">' + fortune.text + '</h2>')
   card.append(listText);
 
   $('#truth-wall').prepend(card);
@@ -125,6 +125,11 @@ function isFortunesOdd() {
     $('#new-fortune').addClass('half-btn');
     if(totalCount !=0 && totalCount != 1) {
       $('#new-fortune').css('top', '25%');
+      if (totalCount >= 5 && totalCount < 6) {
+        $('#new-fortune').css('top', '16%');
+      } else if (totalCount >= 7) {
+        $('#new-fortune').css('top', '11%');
+      }
     }
   } else {
     $('#new-fortune').removeClass('half-btn');

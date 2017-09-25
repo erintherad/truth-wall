@@ -21,6 +21,10 @@ body {
   display: block;
 }
 
+.half-btn {
+  width: 50% !important;
+}
+
 .card {
   display: inline-block;
   width: 50%;
@@ -28,6 +32,8 @@ body {
   float: left;
 }
 
-.half-btn {
-  width: 50% !important;
+.fortune-text {
+  top: 40%;
+  position: relative;
+  font-size: 100%;
 }
