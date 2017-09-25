@@ -65,15 +65,19 @@ function setFortunes(fortunes) {
 }
 
 // random colors
-var safeColors = ['00','33','66','99','cc','ff'];
+var safeColors = [];
+
+for(var i = 0; i < 100; i++) {
+ 	safeColors.push(i.toString());
+}
 var rand = function() {
-    return Math.floor(Math.random()*6);
+    return Math.floor(Math.random()*99);
 };
 var randomColor = function() {
     var r = safeColors[rand()];
     var g = safeColors[rand()];
     var b = safeColors[rand()];
-    return 'rgba(' + r + ', ' + g + ', ' + b + ', 0.5);';
+    return 'rgba(' + r + ', ' + g + ', ' + b + ', 0.6);';
 };
 
 function renderFortune(fortune, totalCount) {
@@ -83,7 +87,7 @@ function renderFortune(fortune, totalCount) {
   var anchor = $('<a>', { href: '#', onClick: 'deleteFortune("' + fortune.id + '")', class: 'pull-right deleteBtn' })
   anchor.append('<span class="glyphicon glyphicon-remove-sign"></span>');
   card.append(anchor);
-  var listText = $('<blockquote class="card-blockquote">' + fortune.text + '</blockquote>')
+  var listText = $('<h2>' + fortune.text + '</h2>')
   card.append(listText);
 
   $('#truth-wall').prepend(card);
