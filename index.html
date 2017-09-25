@@ -4,19 +4,26 @@
     <meta charset="utf-8">
     <title>Truth Wall</title>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
+      <div class="row truth-row">
+        <div class="col-md-8 truth-div">
           <h2>Truth Wall</h2>
-          <button type="button" name="button" id="add-fortune-btn">Add Fortune</button>
-          <div id="truth-wall" class="grid"></div>
+          <div id="truth-wall" class="card-columns">
+            <div class="card deleteDiv">
+              <button class="btn btn-primary" type="button" name="button" id="add-fortune-btn">
+                <span class="glyphicon glyphicon-plus"></span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <script type="text/javascript" src="script.js"></script>
     </div>
   </body>

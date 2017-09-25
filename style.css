@@ -1,5 +1,29 @@
-.grid-item {
+body {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.truth-row {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.truth-div {
+  width: 100%;
+}
+
+.card-columns {
+  width: 100%;
+  column-count: 4;
+}
+
+.card {
   display: inline-block;
   width: 200px;
-  border: 1px solid black;
+  border: 1px black solid;
+  margin: 15px;
+}
+
+.deleteDiv {
+  border: none !important;
 }

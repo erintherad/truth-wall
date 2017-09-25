@@ -65,13 +65,14 @@ function setFortunes(fortunes) {
 }
 
 function renderFortune(fortune) {
-  var listItem = $('<div>', { id: 'fortune_' + fortune.id, class: 'grid-item' });
-  listItem.text(fortune.text);
-  var anchor = $('<a>', { href: '#', onClick: 'deleteFortune("' + fortune.id + '")' })
-  anchor.text('Delete');
+  var listItem = $('<div>', { id: 'fortune_' + fortune.id, class: 'card' });
+  var anchor = $('<a>', { href: '#', onClick: 'deleteFortune("' + fortune.id + '")', class: 'pull-right deleteBtn' })
+  anchor.append('<span class="glyphicon glyphicon-remove-sign"></span>');
   listItem.append(anchor);
+  var listText = $('<blockquote class="card-blockquote">' + fortune.text + '</blockquote>')
+  listItem.append(listText);
 
-  $('#truth-wall').append(listItem);
+  $('#truth-wall').prepend(listItem);
 }
 
 // call default fortune
