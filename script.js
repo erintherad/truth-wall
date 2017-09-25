@@ -84,8 +84,8 @@ function renderFortune(fortune, totalCount) {
   var height = 100.0 / (Math.floor(totalCount / 2) + 1);
 
   var card = $('<div>', { id: 'fortune_' + fortune.id, class: 'card', style: 'height: ' + height + '%; background-color: ' + randomColor() });
-  var anchor = $('<a>', { href: '#', onClick: 'deleteFortune("' + fortune.id + '")', class: 'pull-right deleteBtn' })
-  anchor.append('<span class="glyphicon glyphicon-remove-sign"></span>');
+  var anchor = $('<a>', { href: '#', onClick: 'deleteFortune("' + fortune.id + '")', class: 'pull-right deleteBtn btn-lg' })
+  anchor.append('<span class="glyphicon glyphicon-remove"></span>');
   card.append(anchor);
   var listText = $('<h2 class="text-center fortune-text">' + fortune.text + '</h2>')
   card.append(listText);

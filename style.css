@@ -1,6 +1,5 @@
 body {
-  /*width: 100%;*/
-  /*margin: 0 auto;*/
+  color: #303030;
 }
 
 #truth-wall {
@@ -19,6 +18,18 @@ body {
 #add-fortune-btn {
   margin: auto;
   display: block;
+  background-color: #303030;
+  border-color: #303030;
+}
+
+#add-fortune-btn:hover {
+  background-color: white;
+  color: #303030;
+  border-color: white;
+}
+
+#add-fortune-btn:focus {
+  outline-color: white;
 }
 
 .half-btn {
@@ -36,4 +47,12 @@ body {
   top: 40%;
   position: relative;
   font-size: 100%;
+}
+
+.deleteBtn {
+  color: white;
+}
+
+.deleteBtn:hover {
+  color: #303030;
 }
