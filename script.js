@@ -109,8 +109,29 @@ function appendFortune(fortuneText) {
 
   setFortunes(fortunes);
 
-  // renderFortune(fortune, fortunes.length);
   initializeFortunes();
+}
+
+function isFortunesOdd() {
+  var fortunes = getFortunes();
+  var totalCount = fortunes.length;
+  var top = 100.0 / (Math.floor((totalCount + 1) / 2) + totalCount + 1) + '%';
+
+  if(totalCount === 1) {
+    $('#new-fortune').css('top', '50%');
+  }
+
+  if(totalCount % 2 == 1) {
+    $('#new-fortune').addClass('half-btn');
+    if(totalCount !=0 && totalCount != 1) {
+      $('#new-fortune').css('top', '25%');
+    }
+  } else {
+    $('#new-fortune').removeClass('half-btn');
+    if(totalCount != 0 && totalCount != 1) {
+      $('#new-fortune').css('top', top);
+    }
+  }
 }
 
 function initializeFortunes() {
@@ -121,6 +142,7 @@ function initializeFortunes() {
   $.each(fortunes, function(index, fortune) {
     renderFortune(fortune, fortunes.length);
   });
+        isFortunesOdd();
 }
 
 function deleteFortune(id) {
@@ -138,6 +160,9 @@ function deleteFortune(id) {
 
   // removes fortune from dom
   $('#fortune_' + id).remove();
+
+  initializeFortunes();
+  isFortunesOdd();
 }
 
 $(document).ready(function() {
