@@ -1,5 +1,6 @@
 body {
   color: #303030;
+  font-family: 'Merriweather', serif;
 }
 
 #truth-wall {
@@ -47,6 +48,7 @@ body {
   top: 40%;
   position: relative;
   font-size: 100%;
+  line-height: 1.6em;
 }
 
 .deleteBtn {
